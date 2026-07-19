@@ -63,6 +63,9 @@ function Expenses() {
     setNewCategory] =
     useState("");
 
+    const [editCategories, setEditCategories] =
+  useState(false);
+
   const [editingId,
     setEditingId] =
     useState(null);
@@ -241,7 +244,23 @@ function Expenses() {
     setNewCategory("");
   };
 
-  
+  const deleteCategory = (categoryName) => {
+
+  if (
+    !window.confirm(`Delete "${categoryName}"?`)
+  )
+    return;
+
+  setCategories(
+    categories.filter(
+      (cat) => cat.name !== categoryName
+    )
+  );
+
+  if (selectedCategory === categoryName) {
+    setSelectedCategory("");
+  }
+};
   const totalExpense =
     expenses.reduce(
 
@@ -402,70 +421,115 @@ function Expenses() {
             
             <div className="text-center mt-4">
 
-              {!newCategory && (
+  <div className="d-flex justify-content-center gap-3">
 
-                <button
+    <button
+      onClick={() => setNewCategory(" ")}
+      className="btn btn-outline-dark"
+      style={{
+        borderRadius: "50px"
+      }}
+    >
+      + Add Category
+    </button>
 
-                  onClick={() =>
-                    setNewCategory(" ")
-                  }
+    <button
+      onClick={() =>
+        setEditCategories(!editCategories)
+      }
+      className="btn btn-dark"
+      style={{
+        borderRadius: "50px"
+      }}
+    >
+      ✏️ Edit Categories
+    </button>
 
-                  className="btn btn-outline-dark"
+  </div>
 
-                  style={{
-                    borderRadius: "50px"
-                  }}
-                >
-                  + Add Category
-                </button>
-              )}
+  {newCategory !== "" && (
 
-              {newCategory !== "" && (
+    <div
+      className="d-flex justify-content-center gap-2 mt-3"
+    >
 
-                <div
-                  className="d-flex justify-content-center gap-2 mt-3"
-                >
+      <input
+        type="text"
+        placeholder="Category name"
+        value={newCategory}
+        onChange={(e) =>
+          setNewCategory(e.target.value)
+        }
+        className="form-control"
+        style={{
+          maxWidth: "250px",
+          borderRadius: "15px"
+        }}
+      />
 
-                  <input
+      <button
+        onClick={addCategory}
+        className="btn btn-dark"
+        style={{
+          borderRadius: "15px"
+        }}
+      >
+        Save
+      </button>
 
-                    type="text"
+    </div>
 
-                    placeholder="Category name"
+  )}
 
-                    value={newCategory}
+</div>
+{editCategories && (
 
-                    onChange={(e) =>
-                      setNewCategory(
-                        e.target.value
-                      )
-                    }
+  <div
+    className="card mt-4 border-0 shadow-sm"
+    style={{
+      borderRadius: "20px"
+    }}
+  >
 
-                    className="form-control"
+    <div className="card-body">
 
-                    style={{
-                      maxWidth: "250px",
+      <h5 className="fw-bold mb-3">
+        Manage Categories
+      </h5>
 
-                      borderRadius: "15px"
-                    }}
-                  />
+      {categories.map((cat) => (
 
-                  <button
+        <div
+          key={cat.name}
+          className="d-flex justify-content-between align-items-center border-bottom py-2"
+        >
 
-                    onClick={addCategory}
+          <div className="d-flex align-items-center gap-2">
 
-                    className="btn btn-dark"
+            {cat.icon}
 
-                    style={{
-                      borderRadius: "15px"
-                    }}
-                  >
-                    Save
-                  </button>
+            <span>{cat.name}</span>
 
-                </div>
-              )}
-            </div>
+          </div>
 
+          <button
+            className="btn btn-sm btn-outline-danger"
+            onClick={() =>
+              deleteCategory(cat.name)
+            }
+          >
+            🗑
+          </button>
+
+        </div>
+
+      ))}
+
+    </div>
+
+  </div>
+
+)}
             
             <div className="text-center mt-5">
 
