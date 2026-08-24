@@ -85,7 +85,7 @@ function Expenses() {
         localStorage.getItem("token");
 
       const res = await axios.get(
-        "http://localhost:5000/api/expenses",
+        "https://expense-tracker-fullstack-6p2s.onrender.com/api/expenses",
         {
           headers: {
             Authorization:
@@ -119,7 +119,7 @@ function Expenses() {
 
         await axios.put(
 
-          `http://localhost:5000/api/expenses/${editingId}`,
+          `https://expense-tracker-fullstack-6p2s.onrender.com/api/expenses/${editingId}`,
 
           {
             title: selectedCategory,
@@ -141,7 +141,7 @@ function Expenses() {
 
         await axios.post(
 
-          "http://localhost:5000/api/expenses",
+          "https://expense-tracker-fullstack-6p2s.onrender.com/api/expenses",
 
           {
             title: selectedCategory,
@@ -184,7 +184,7 @@ function Expenses() {
 
       await axios.delete(
 
-        `http://localhost:5000/api/expenses/${id}`,
+        `https://expense-tracker-fullstack-6p2s.onrender.com/api/expenses/${id}`,
 
         {
           headers: {

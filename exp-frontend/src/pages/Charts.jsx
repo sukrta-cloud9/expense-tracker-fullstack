@@ -39,7 +39,7 @@ function Charts() {
         localStorage.getItem("token");
 
       const res = await axios.get(
-        "http://localhost:5000/api/expenses/summary",
+        "https://expense-tracker-fullstack-6p2s.onrender.com/api/expenses/summary",
         {
           headers: {
             Authorization:
