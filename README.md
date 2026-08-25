@@ -6,7 +6,7 @@ The application allows users to securely manage their personal expenses, view sp
 ## Live Demo
 
 **Frontend:**  
-https://YOUR-VERCEL-URL.vercel.app
+https://expense-tracker-fullstack-eight.vercel.app/
 
 **Backend:**  
 https://expense-tracker-fullstack-6p2s.onrender.com
